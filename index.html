@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PEARL Hub Wireframe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: low-fidelity wireframe. Sidebar + content frame, grey boxes and dashed placeholders, no styling of the real site. */
+:root {
+  --paper: #f6f6f4;
+  --frame: #ffffff;
+  --ink: #2b2b2b;
+  --soft: #8a8a86;
+  --line: #bdbdb8;
+  --fill: #e9e9e5;
+  --note: #6b6b66;
+  --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper: #1b1b1a; --frame: #232322; --ink: #e4e4e0; --soft: #9a9a95; --line: #4a4a47; --fill: #2e2e2c; --note: #a5a5a0; color-scheme: dark } }
+:root[data-theme="dark"] { --paper: #1b1b1a; --frame: #232322; --ink: #e4e4e0; --soft: #9a9a95; --line: #4a4a47; --fill: #2e2e2c; --note: #a5a5a0; color-scheme: dark }
+
+* { box-sizing: border-box }
+body {
+  margin: 0; background: var(--paper); color: var(--ink); font: 14px/1.45 var(--sans);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+}
+.top { max-width: 1180px; margin: 0 auto 14px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between }
+.top h1 { font: 600 16px var(--mono); margin: 0; letter-spacing: 0.02em }
+.top p { margin: 0; color: var(--note); font: 12px var(--mono) }
+.pages { max-width: 1180px; margin: 0 auto 14px; display: flex; flex-wrap: wrap; gap: 6px }
+.pages a { font: 12px var(--mono); color: var(--ink); text-decoration: none; border: 1px solid var(--line); padding: 4px 9px; border-radius: 3px; background: var(--frame) }
+.pages a[aria-current="page"] { background: var(--ink); color: var(--frame); border-color: var(--ink) }
+.pages a:focus-visible, .side a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
+
+.app { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 200px minmax(0, 1fr); border: 1.5px solid var(--ink); background: var(--frame); min-height: 640px }
+.side { border-right: 1.5px solid var(--ink); padding: 14px; display: flex; flex-direction: column; gap: 14px }
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 700 }
+.logo i { width: 28px; height: 28px; border: 1.5px solid var(--ink); display: grid; place-items: center; font: 700 13px var(--mono); font-style: normal }
+.side nav { display: grid; gap: 4px }
+.side nav a { color: var(--ink); text-decoration: none; padding: 6px 8px; border: 1px solid transparent; border-radius: 3px }
+.side nav a[aria-current="page"] { border-color: var(--ink); font-weight: 600 }
+.side .grow { flex: 1 }
+.side .me { border: 1px solid var(--line); padding: 8px; display: grid; gap: 2px; font-size: 13px }
+.side small, .muted { color: var(--soft) }
+.side .legal { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; color: var(--soft) }
+
+main { padding: 20px; min-width: 0; display: grid; gap: 16px; align-content: start }
+.head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between }
+.head h2 { margin: 0; font-size: 22px }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+.btn { border: 1.5px solid var(--ink); padding: 5px 12px; border-radius: 3px; font-size: 13px; background: var(--frame); color: var(--ink) }
+.btn.ghost { border-style: dashed; color: var(--soft); border-color: var(--line) }
+.field { border: 1px solid var(--line); padding: 6px 10px; min-width: 150px; color: var(--soft); font-size: 13px; border-radius: 3px }
+.box { border: 1px solid var(--line); padding: 14px; min-width: 0 }
+.box h3 { margin: 0 0 10px; font-size: 14px }
+.ph { border: 1px dashed var(--line); background: repeating-linear-gradient(45deg, transparent 0 9px, var(--fill) 9px 10px); color: var(--soft); display: grid; place-items: center; font: 12px var(--mono); min-height: 90px; text-align: center; padding: 8px }
+.lines { display: grid; gap: 7px }
+.lines span { height: 9px; background: var(--fill); border-radius: 2px }
+.lines span:nth-child(2) { width: 80% } .lines span:nth-child(3) { width: 60% }
+.note { font: 11.5px var(--mono); color: var(--note) }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px }
+.tile { border: 1px solid var(--line); padding: 10px; display: grid; gap: 2px }
+.tile b { font: 600 18px var(--mono) }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px }
+.card { border: 1.5px solid var(--ink); padding: 12px; display: grid; gap: 8px; align-content: start }
+.card b { font-size: 15px }
+.badge { justify-self: start; border: 1px solid var(--line); padding: 1px 8px; border-radius: 99px; font-size: 12px; color: var(--soft) }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px }
+dl.facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0 }
+dl.facts dt { color: var(--soft) }
+dl.facts dd { margin: 0 }
+
+.cal-wrap { overflow-x: auto }
+.cal { min-width: 640px; display: grid; grid-template-columns: 54px repeat(5, 1fr); border: 1px solid var(--line) }
+.cal div { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); height: 30px; font: 11px var(--mono); color: var(--soft); padding: 3px 5px }
+.cal .dh { height: 40px; color: var(--ink); text-align: center; font-family: var(--sans); font-size: 12px; font-weight: 600 }
+.chips { display: flex; flex-wrap: wrap; gap: 6px }
+.chip { border: 1px solid var(--line); border-radius: 99px; padding: 2px 10px; font-size: 12px }
+.chip::before { content: "○ "; color: var(--soft) }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px }
+th, td { border-bottom: 1px solid var(--line); padding: 7px 8px; text-align: left }
+th { color: var(--soft); font-weight: 500 }
+.tbl { overflow-x: auto }
+
+.signin { max-width: 380px; margin: 40px auto; border: 1.5px solid var(--ink); padding: 22px; display: grid; gap: 12px }
+
+.view[hidden], .page[hidden], [hidden] { display: none !important }
+@media (max-width: 760px) {
+  .app { grid-template-columns: minmax(0, 1fr) }
+  .side { border-right: 0; border-bottom: 1.5px solid var(--ink) }
+  .side nav { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+  .side .grow, .side .legal { display: none }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important } }
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>PEARL Robot Hub Wireframe</h1>
+</div>
+
+<nav class="pages" aria-label="Wireframe pages">
+  <a href="#sign-in">Sign in</a>
+  <a href="#robots">Robots</a>
+  <a href="#robot-detail">Robot page</a>
+  <a href="#calendar">Calendar</a>
+  <a href="#maintenance">Maintenance</a>
+  <a href="#experiments">Experiments</a>
+  <a href="#statistics">Statistics</a>
+  <a href="#users">Users</a>
+  <a href="#legal">Legal</a>
+</nav>
+
+<!-- Sign in: no sidebar -->
+<section class="view" id="v-sign-in" hidden>
+  <div class="app" style="grid-template-columns: minmax(0,1fr)">
+    <main>
+      <div class="signin">
+        <div class="logo"><i>P</i> PEARL Robot Hub</div>
+        <span class="muted">PEARL Lab, TU Darmstadt</span>
+        <span class="btn" style="text-align:center">Sign in with TU-ID</span>
+        <span class="note" style="text-align:center">or</span>
+        <span class="field">Username</span>
+        <span class="field">Password</span>
+        <span class="btn" style="text-align:center">Sign in</span>
+        <div class="row" style="justify-content:center; font-size:12px; color:var(--soft)">Imprint, Privacy, Accessibility</div>
+      </div>
+
+      <!-- Other areas: kept simple on purpose -->
+      <div class="page" data-page="maintenance" hidden>
+        <div class="head"><h2>Maintenance</h2><span class="btn">Report issue</span></div>
+        <div class="ph">Reports</div>
+      </div>
+
+      <div class="page" data-page="experiments" hidden>
+        <div class="head"><h2>Experiments</h2><span class="btn">New experiment log</span></div>
+        <div class="ph">Experiment logs</div>
+      </div>
+
+      <div class="page" data-page="statistics" hidden>
+        <div class="head"><h2>Statistics</h2></div>
+        <div class="ph" style="min-height:220px">Charts and figures</div>
+      </div>
+
+      <div class="page" data-page="users" hidden>
+        <div class="head"><h2>Users</h2><span class="btn">New user</span></div>
+        <div class="ph">User list</div>
+      </div>
+
+      <div class="page" data-page="legal" hidden>
+        <div class="row"><span class="btn ghost">Imprint</span><span class="btn">Privacy</span><span class="btn ghost">Accessibility</span></div>
+        <div class="box"><div class="lines"><span></span><span></span><span></span></div></div>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- App frame with sidebar, shared by the other pages -->
+<section class="view" id="v-app" hidden>
+  <div class="app">
+    <aside class="side">
+      <div class="logo"><i>P</i> PEARL Robot Hub</div>
+      <small>PEARL Lab, TU Darmstadt</small>
+      <nav aria-label="Navigation">
+        <a href="#robots" data-for="robots robot-detail">Robots</a>
+        <a href="#calendar" data-for="calendar">Calendar</a>
+        <a href="#maintenance" data-for="maintenance">Maintenance</a>
+        <a href="#experiments" data-for="experiments">Experiments</a>
+        <a href="#statistics" data-for="statistics">Statistics</a>
+        <a href="#users" data-for="users">Users</a>
+      </nav>
+      <div class="grow"></div>
+      <div class="row"><span class="btn ghost">DE</span><span class="btn">EN</span><span class="btn ghost">Appearance</span></div>
+      <div class="me"><b>First Last</b><small>Role</small></div>
+      <div class="legal"><span>Imprint</span><span>Privacy</span><span>Accessibility</span></div>
+    </aside>
+
+    <main>
+      <!-- Robots -->
+      <div class="page" data-page="robots" hidden>
+        <div class="head"><h2>Robots</h2><div class="row"><span class="btn ghost">Print QR labels</span><span class="btn">New robot</span></div></div>
+        <div class="tiles">
+          <div class="tile"><small>Available</small><b>…</b></div>
+          <div class="tile"><small>Reserved</small><b>…</b></div>
+          <div class="tile"><small>In maintenance</small><b>…</b></div>
+          <div class="tile"><small>Defect</small><b>…</b></div>
+          <div class="tile"><small>Retired</small><b>…</b></div>
+        </div>
+        <span class="field">Search robots</span>
+        <div class="cards">
+          <div class="card"><b>Franka 1</b><small class="muted">Franka Research 3</small><span class="badge">Status</span><div class="lines"><span></span><span></span></div></div>
+          <div class="card"><b>Franka 2</b><small class="muted">Franka Research 3</small><span class="badge">Status</span><div class="lines"><span></span><span></span></div></div>
+          <div class="card"><b>xArm 7</b><small class="muted">UFACTORY xArm 7</small><span class="badge">Status</span><div class="lines"><span></span><span></span></div></div>
+          <div class="card"><b>Tiago</b><small class="muted">PAL Robotics TIAGo</small><span class="badge">Status</span><div class="lines"><span></span><span></span></div></div>
+          <div class="card"><b>Tiago++</b><small class="muted">PAL Robotics TIAGo++</small><span class="badge">Status</span><div class="lines"><span></span><span></span></div></div>
+        </div>
+      </div>
+
+      <!-- Robot detail -->
+      <div class="page" data-page="robot-detail" hidden>
+        <div class="head"><h2>Franka 1</h2><div class="row"><span class="btn ghost">QR label</span><span class="btn ghost">Edit</span><span class="btn">Reserve</span></div></div>
+        <div class="two">
+          <div class="box"><h3>Details</h3>
+            <dl class="facts">
+              <dt>Type</dt><dd>Franka Research 3</dd>
+              <dt>Location</dt><dd>…</dd>
+              <dt>Responsible</dt><dd>…</dd>
+              <dt>Status</dt><dd>…</dd>
+              <dt>Firmware</dt><dd>…</dd>
+              <dt>Operating system</dt><dd>…</dd>
+              <dt>Equipment</dt><dd>…</dd>
+              <dt>Last used by</dt><dd>…</dd>
+            </dl>
+          </div>
+          <div class="box"><h3>Live status</h3><div class="ph">Online state, battery, last message</div></div>
+        </div>
+        <div class="box"><h3>Upcoming reservations</h3><div class="ph">No reservations yet</div></div>
+        <div class="box"><h3>Maintenance</h3><div class="ph">No open reports</div></div>
+        <div class="box"><h3>Experiments</h3><div class="ph">No logs yet</div></div>
+      </div>
+
+      <!-- Calendar -->
+      <div class="page" data-page="calendar" hidden>
+        <div class="head"><h2>Calendar</h2><div class="row"><span class="field">All robots</span><span class="btn ghost">Only mine</span><span class="btn">New reservation</span></div></div>
+        <div class="box" style="display:grid; gap:12px">
+          <div class="row" style="justify-content:space-between">
+            <div class="chips"><span class="chip">Franka 1</span><span class="chip">Franka 2</span><span class="chip">xArm 7</span><span class="chip">Tiago</span><span class="chip">Tiago++</span></div>
+            <span class="btn ghost">Weekend</span>
+          </div>
+          <div class="row" style="justify-content:space-between">
+            <div class="row"><span class="btn">‹</span><span class="btn">›</span><span class="btn ghost">Today</span></div>
+            <b>Week</b>
+            <div class="row"><span class="btn ghost">Month</span><span class="btn">Week</span><span class="btn ghost">Day</span></div>
+          </div>
+          <div class="cal-wrap"><div class="cal" id="cal"></div></div>
+        </div>
+      </div>
+
+
+
+
+
+    </main>
+  </div>
+</section>
+
+
+<script>
+// Empty week grid: Mon to Fri, 08:00 to 18:00.
+const cal = document.getElementById('cal')
+const days = ['', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+cal.innerHTML = days.map((d) => `<div class="dh">${d}</div>`).join('') +
+  Array.from({ length: 11 }, (_, i) => `<div>${String(8 + i).padStart(2, '0')}:00</div>` + '<div></div>'.repeat(5)).join('')
+
+// Show one page per hash; only switches drafts, nothing else works.
+const app = ['robots', 'robot-detail', 'calendar', 'maintenance', 'experiments', 'statistics', 'users', 'legal']
+function show() {
+  const page = location.hash.slice(1) || 'robots'
+  document.getElementById('v-sign-in').hidden = page !== 'sign-in'
+  document.getElementById('v-app').hidden = !app.includes(page)
+  document.querySelectorAll('.page').forEach((p) => (p.hidden = p.dataset.page !== page))
+  document.querySelectorAll('.pages a').forEach((a) => (a.hash === '#' + page ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')))
+  document.querySelectorAll('.side nav a').forEach((a) => (a.dataset.for.split(' ').includes(page) ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')))
+}
+addEventListener('hashchange', show)
+show()
+</script>
+</body>
+</html>

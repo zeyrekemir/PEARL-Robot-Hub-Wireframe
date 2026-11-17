@@ -6,7 +6,7 @@ Team: Haitam Bourahda (project lead), Mara Henkel, Emir Zeyrek, Tom Kaufmann, Ni
 
 Team supervisor: Julius Wahl
 
-This wireframe was made with the help of AI (KI).
+This wireframe was made with the help of AI.
 
 The full application is in [zeyrekemir/TPSE-Gruppe](https://github.com/zeyrekemir/TPSE-Gruppe).
 
